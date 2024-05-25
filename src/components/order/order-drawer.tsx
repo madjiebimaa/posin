@@ -46,7 +46,7 @@ export default function OrderDrawer() {
   };
 
   return (
-    <Drawer open={open} onOpenChange={setOpen}>
+    <Drawer open={open} onOpenChange={setOpen} dismissible={false}>
       <Button variant="ghost" onClick={handleTriggerClick}>
         <span>Order {cart.length !== 0 ? cart.length : 0}</span>
         <ChevronDown className="ml-2 size-4 shrink-0" />
