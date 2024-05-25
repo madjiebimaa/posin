@@ -1,11 +1,11 @@
 import { create } from "zustand";
 
-import { CartItem, Product } from "@/lib/types";
+import { Cart, Product } from "@/lib/types";
 import { nanoid } from "@/lib/utils";
 import { createJSONStorage, persist } from "zustand/middleware";
 
 type CartState = {
-  cart: CartItem[];
+  cart: Cart;
 };
 
 type CartActions = {
@@ -14,6 +14,7 @@ type CartActions = {
     increaseItemQuantity: (id: Product["id"]) => void;
     decreaseItemQuantity: (id: Product["id"]) => void;
     deleteItem: (id: Product["id"]) => void;
+    reset: () => void;
   };
 };
 
@@ -69,6 +70,7 @@ const cartStore = create<CartState & CartActions>()(
           set((state) => ({
             cart: state.cart.filter((item) => item.product.id !== id),
           })),
+        reset: () => set(() => ({ ...initialState })),
       },
     }),
     {

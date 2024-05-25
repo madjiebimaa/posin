@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
+import ClientOnly from "@/components/global/client-only";
 import { Toaster } from "@/components/ui/sonner";
 
 import { cn } from "@/lib/utils";
@@ -26,7 +27,9 @@ export default function RootLayout({
         className={cn("bg-[#F5F6F7] antialiased", inter.className)}
       >
         {children}
-        <Toaster />
+        <ClientOnly>
+          <Toaster />
+        </ClientOnly>
       </body>
     </html>
   );

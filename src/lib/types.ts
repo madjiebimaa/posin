@@ -21,6 +21,8 @@ export type CartItem = {
   updatedAt: Date;
 };
 
+export type Cart = CartItem[];
+
 export type Customer = {
   id: string;
   name: string;
@@ -29,8 +31,8 @@ export type Customer = {
 
 export type Order = {
   id: string;
-  customer: Customer;
-  cart: CartItem[];
+  customer: Customer | null;
+  cart: Cart;
   createdAt: Date;
   updatedAt: Date;
 };
@@ -40,3 +42,5 @@ export type RGB = {
   g: number;
   b: number;
 };
+
+export type AddOrderArgs = Omit<Order, "id" | "createdAt" | "updatedAt">;

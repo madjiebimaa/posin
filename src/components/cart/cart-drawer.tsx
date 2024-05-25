@@ -14,25 +14,34 @@ import {
   DrawerTitle,
 } from "@/components/ui/drawer";
 
-import useDevices from "@/hooks/use-devices";
-import { useCart } from "@/store/cart";
+import { useCart, useCartActions } from "@/store/cart";
+import { useOrderActions } from "@/store/order";
 
 export default function CartDrawer() {
   const [open, setOpen] = useState(false);
   const cart = useCart();
-  const { isSmallDevice } = useDevices();
+  const cartActions = useCartActions();
+  const orderActions = useOrderActions();
 
   const handleTriggerClick = () => {
     if (cart.length === 0) {
-      toast.info("Your cart is empty! Add some items to get started.", {
-        position: isSmallDevice ? "top-center" : "bottom-right",
-      });
+      toast.info("Your cart is empty! Add some items to get started.");
     } else {
       setOpen(true);
     }
   };
 
   const handleCloseClick = () => setOpen(false);
+
+  const handlePlaceOrderClick = () => {
+    orderActions.addOrder({ customer: null, cart });
+    cartActions.reset();
+    toast.info(
+      "Your order has been placed successfully! Thank you for shopping with us.",
+    );
+
+    setOpen(false);
+  };
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>
@@ -56,8 +65,12 @@ export default function CartDrawer() {
               >
                 Cancel
               </Button>
-              <Button className="rounded-full" disabled={cart.length === 0}>
-                To Pay
+              <Button
+                className="rounded-full"
+                disabled={cart.length === 0}
+                onClick={handlePlaceOrderClick}
+              >
+                Place Order
               </Button>
             </div>
           </div>

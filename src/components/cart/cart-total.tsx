@@ -1,10 +1,10 @@
 import { Separator } from "@/components/ui/separator";
 
-import { CartItem } from "@/lib/types";
+import { Cart } from "@/lib/types";
 import { rupiah } from "@/lib/utils";
 
 interface CartTotalProps {
-  cart: CartItem[];
+  cart: Cart;
 }
 
 export default function CartTotal({ cart }: CartTotalProps) {
