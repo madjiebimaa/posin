@@ -1,8 +1,8 @@
 import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 import { Cart, Product } from "@/lib/types";
 import { nanoid } from "@/lib/utils";
-import { createJSONStorage, persist } from "zustand/middleware";
 
 type CartState = {
   cart: Cart;

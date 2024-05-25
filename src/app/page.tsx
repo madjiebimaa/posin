@@ -1,7 +1,7 @@
 import { Menu, Search } from "lucide-react";
 
-import CartDrawer from "@/components/cart/cart-drawer";
 import CategoryCardList from "@/components/category/category-card-list";
+import OrderDrawer from "@/components/order/order-drawer";
 import ProductCardList from "@/components/product/product-card-list";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,7 +14,7 @@ export default function Home() {
         <Button variant="ghost" size="icon" className="shrink-0">
           <Menu className="size-4 shrink-0" />
         </Button>
-        <CartDrawer />
+        <OrderDrawer />
       </section>
       <section className="px-4 py-2">
         <div className="relative">
