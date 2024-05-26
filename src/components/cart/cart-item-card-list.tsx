@@ -26,7 +26,7 @@ export default function CartItemCardList({
       </section>
     </ScrollArea>
   ) : (
-    <div className="flex h-[360px] items-center justify-center sm:h-[410px]">
+    <div className="flex flex-1 items-center justify-center">
       <PackageOpen className="size-10 shrink-0 text-muted-foreground" />
     </div>
   );

@@ -12,7 +12,7 @@ import {
 import { customAlphabet } from "nanoid";
 import { twMerge } from "tailwind-merge";
 
-import { RGB } from "@/lib/types";
+import { Category, Product, RGB } from "@/lib/types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -75,6 +75,10 @@ function lightenHex(value: number, percent: number): number {
   return Math.min(255, Math.floor(value + (255 - value) * (percent / 100)));
 }
 
+function darkenHex(value: number, percent: number): number {
+  return Math.max(0, Math.floor(value * (1 - percent / 100)));
+}
+
 function formatHexValue(value: number): string {
   return value.toString(16).padStart(2, "0");
 }
@@ -84,4 +88,32 @@ export function lightenColor(hex: string, percent: number): string {
   const { r, g, b } = extractRgbFromHex(formattedHex);
 
   return `#${formatHexValue(lightenHex(r, percent))}${formatHexValue(lightenHex(g, percent))}${formatHexValue(lightenHex(b, percent))}`;
+}
+
+export function darkenColor(hex: string, percent: number): string {
+  const formattedHex = hex.length === 3 ? convert3To6DigitsHex(hex) : hex;
+  const { r, g, b } = extractRgbFromHex(formattedHex);
+
+  return `#${formatHexValue(darkenHex(r, percent))}${formatHexValue(darkenHex(g, percent))}${formatHexValue(darkenHex(b, percent))}`;
+}
+
+export function applyProductsFilter(
+  products: Product[],
+  { query, categoryId }: { query: string; categoryId: Category["id"] },
+): Product[] {
+  let filteredProducts = [...products];
+
+  if (query) {
+    filteredProducts = filteredProducts.filter((product) =>
+      product.name.toLowerCase().includes(query.toLowerCase()),
+    );
+  }
+
+  if (categoryId) {
+    filteredProducts = filteredProducts.filter(
+      (product) => product.categoryId === categoryId,
+    );
+  }
+
+  return filteredProducts;
 }
