@@ -1,4 +1,4 @@
-import { Barcode, CircleDollarSign, CreditCard } from "lucide-react";
+import { CircleDollarSign, CreditCard, QrCode } from "lucide-react";
 
 import PaymentMethodOption from "@/components/order/payment-method-option";
 
@@ -7,7 +7,7 @@ import { PaymentMethodOption as Option } from "@/lib/types";
 const options: Option[] = [
   { id: "CASH", label: "Cash", icon: CircleDollarSign },
   { id: "DEBIT_CARD", label: "Debit Card", icon: CreditCard },
-  { id: "E-WALLET", label: "E-Wallet", icon: Barcode },
+  { id: "E-WALLET", label: "E-Wallet", icon: QrCode },
 ];
 
 export default function PaymentMethodOptionList() {

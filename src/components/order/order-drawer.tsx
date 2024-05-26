@@ -57,7 +57,7 @@ export default function OrderDrawer() {
         </DrawerHeader>
         <CartItemCardList className="my-4 px-4" />
         <section className="mt-auto p-4">
-          <div className="flex flex-col gap-10 rounded-md bg-white p-4 shadow-sm">
+          <div className="flex flex-col gap-6 rounded-md bg-white p-4 shadow-sm">
             <OrderTotal cart={cart} />
             <PaymentMethodOptionList />
             <div className="grid grid-cols-2 gap-2">

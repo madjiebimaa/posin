@@ -33,7 +33,7 @@ export default function CartItemCard({ item }: CartItemCardProps) {
             <Button
               variant="ghost"
               size="icon"
-              className="size-6 shrink-0"
+              className="size-6 shrink-0 rounded-r-none"
               onClick={() => cartActions.decreaseItemQuantity(item.product.id)}
             >
               <Minus className="size-4 shrink-0" />
@@ -44,7 +44,7 @@ export default function CartItemCard({ item }: CartItemCardProps) {
             <Button
               variant="ghost"
               size="icon"
-              className="size-6 shrink-0"
+              className="size-6 shrink-0 rounded-l-none"
               onClick={() => cartActions.increaseItemQuantity(item.product.id)}
             >
               <Plus className="size-4 shrink-0" />

@@ -18,7 +18,7 @@ export default function CartItemCardList({
   const cart = useCart();
 
   return cart.length !== 0 ? (
-    <ScrollArea className={cn("h-[360px] sm:h-[410px]", className)} {...props}>
+    <ScrollArea className={cn("flex-1", className)} {...props}>
       <section className="flex flex-col gap-2">
         {cart.map((item) => (
           <CartItemCard key={item.product.id} item={item} />
