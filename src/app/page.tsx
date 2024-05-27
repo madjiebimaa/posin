@@ -1,9 +1,13 @@
 import { Menu } from "lucide-react";
+import { Suspense } from "react";
 
 import CartDrawer from "@/components/cart/cart-drawer";
 import CategoryCardList from "@/components/category/category-card-list";
 import ProductCardList from "@/components/product/product-card-list";
 import ProductSearch from "@/components/product/product-search";
+import CategoryCardListSkeleton from "@/components/skeleton/category-card-list-skeleton";
+import ProductCardListSkeleton from "@/components/skeleton/product-card-list-skeleton";
+import ProductSearchSkeleton from "@/components/skeleton/product-search-skeleton";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
@@ -17,13 +21,19 @@ export default function Home() {
         <CartDrawer />
       </section>
       <section className="px-4 py-2">
-        <ProductSearch />
+        <Suspense fallback={<ProductSearchSkeleton />}>
+          <ProductSearch />
+        </Suspense>
       </section>
-      <CategoryCardList className="mb-2 ml-4 pb-4 pt-4" />
+      <Suspense fallback={<CategoryCardListSkeleton />}>
+        <CategoryCardList className="mb-2 ml-4 py-4" />
+      </Suspense>
       <div className="px-4 py-2">
         <Separator />
       </div>
-      <ProductCardList className="mb-2 mt-6 px-4" />
+      <Suspense fallback={<ProductCardListSkeleton />}>
+        <ProductCardList className="mb-2 mt-6 px-4" />
+      </Suspense>
     </main>
   );
 }

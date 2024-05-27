@@ -23,8 +23,8 @@ export default function CategoryCardList({ ...props }: CategoryCardListProps) {
             className={cn(categories.length - 1 === index && "mr-4")}
           />
         ))}
-        <ScrollBar orientation="horizontal" />
       </div>
+      <ScrollBar orientation="horizontal" />
     </ScrollArea>
   );
 }
