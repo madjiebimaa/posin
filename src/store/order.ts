@@ -27,6 +27,7 @@ type OrderActions = {
     addOrder: (args: AddOrderArgs) => void;
     toggleIsNeedShipped: () => void;
     selectTransportation: (transportation: ShippingTransportation) => void;
+    addAddress: (address: string) => void;
     selectPaymentMethod: (paymentMethod: PaymentMethod) => void;
   };
 };
@@ -64,6 +65,7 @@ const orderStore = create<OrderState & OrderActions>()(
         toggleIsNeedShipped: () =>
           set((state) => {
             const nextIsNeedShipped = !state.order.isNeedShipped;
+            
             return {
               order: {
                 ...state.order,
@@ -79,18 +81,35 @@ const orderStore = create<OrderState & OrderActions>()(
           }),
         selectTransportation: (transportation) =>
           set((state) => ({
-            order: state.order.isNeedShipped
-              ? {
-                  ...state.order,
-                  shipping: state.order.shipping
-                    ? {
-                        ...state.order.shipping,
-                        transportation,
-                      }
-                    : { address: null, transportation },
-                }
-              : state.order,
+            order: {
+              ...state.order,
+              shipping: state.order.shipping
+                ? {
+                    ...state.order.shipping,
+                    transportation,
+                  }
+                : { address: null, transportation },
+            },
           })),
+        addAddress: (address) =>
+          set((state) => {
+            const nextAddress = address.length !== 0 ? address : null;
+
+            return {
+              order: {
+                ...state.order,
+                shipping: state.order.shipping
+                  ? {
+                      ...state.order.shipping,
+                      address: nextAddress,
+                    }
+                  : {
+                      address: nextAddress,
+                      transportation: DEFAULT_SHIPPING_TRANSPORTATION,
+                    },
+              },
+            };
+          }),
         selectPaymentMethod: (paymentMethod) =>
           set((state) => ({ order: { ...state.order, paymentMethod } })),
       },

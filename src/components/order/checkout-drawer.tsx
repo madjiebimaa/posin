@@ -4,6 +4,7 @@ import { ArrowDown } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
+import AddressInput from "@/components/order/address-input";
 import PaymentMethodOptionList from "@/components/order/payment-method-option-list";
 import ShippingSwitch from "@/components/order/shipping-switch";
 import TransportationOptionList from "@/components/order/transportation-option-list";
@@ -80,6 +81,7 @@ export default function CheckoutDrawer() {
         <section className="flex-1 px-4 pb-4">
           <div className="flex h-full flex-col gap-6 rounded-md bg-white p-4 shadow-sm">
             <ShippingSwitch />
+            {order.isNeedShipped && <AddressInput />}
             {order.isNeedShipped && <TransportationOptionList />}
             <PaymentMethodOptionList className="mt-auto" />
           </div>
@@ -101,7 +103,14 @@ export default function CheckoutDrawer() {
             <Button
               size="lg"
               className="flex-1 rounded-full"
-              disabled={cart.length === 0}
+              disabled={
+                cart.length === 0 ||
+                Boolean(
+                  order.isNeedShipped &&
+                    order.shipping &&
+                    !order.shipping.address,
+                )
+              }
               onClick={handlePlaceOrderClick}
             >
               Create Order
