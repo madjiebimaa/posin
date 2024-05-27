@@ -21,14 +21,6 @@ export default function ProductCard({
   const cart = useCart();
   const cartActions = useCartActions();
 
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
-
   const isProductSelected = Boolean(
     cart.find((item) => item.product.id === product.id),
   );
@@ -36,6 +28,14 @@ export default function ProductCard({
   const productCategory = categories.find(
     (category) => category.id === product.categoryId,
   )!;
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
 
   return (
     <div

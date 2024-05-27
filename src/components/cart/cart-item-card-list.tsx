@@ -20,8 +20,12 @@ export default function CartItemCardList({
   return cart.length !== 0 ? (
     <ScrollArea className={cn("flex-1", className)} {...props}>
       <section className="flex flex-col gap-2">
-        {cart.map((item) => (
-          <CartItemCard key={item.product.id} item={item} />
+        {cart.map((item, index) => (
+          <CartItemCard
+            key={item.product.id}
+            item={item}
+            className={cn(cart.length - 1 === index && "mb-4")}
+          />
         ))}
       </section>
     </ScrollArea>

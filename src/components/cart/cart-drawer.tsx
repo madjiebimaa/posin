@@ -48,7 +48,10 @@ export default function CartDrawer() {
       <Button variant="ghost" onClick={handleTriggerClick} className="shrink-0">
         <ShoppingCart className="size-4 shrink-0" />
       </Button>
-      <DrawerContent className="mx-auto flex h-[95dvh] max-w-xl flex-col justify-between bg-[#F5F6F7]">
+      <DrawerContent
+        className="mx-auto flex h-[95dvh] max-w-xl flex-col bg-[#F5F6F7]"
+        handleClassName="bg-white"
+      >
         <DrawerHeader className="sm:text-center">
           <DrawerTitle>
             <span>Your Shopping Cart</span>
@@ -59,24 +62,22 @@ export default function CartDrawer() {
             )}
           </DrawerTitle>
         </DrawerHeader>
-        <CartItemCardList className="my-4 px-4" />
-        <section className="mt-auto p-4">
-          <div className="flex flex-col gap-6 rounded-md bg-white p-4 shadow-sm">
-            <div className="flex items-center justify-between">
-              <p className="text-lg font-medium">Total</p>
-              <p className="text-lg font-black">{rupiah(total)}</p>
-            </div>
-            <div className="flex items-center justify-center gap-2">
-              <Button
-                variant="outline"
-                size="icon"
-                className="size-11 rounded-full"
-                onClick={handleCloseClick}
-              >
-                <ArrowDown className="size-4 shrink-0" />
-              </Button>
-              <CheckoutDrawer />
-            </div>
+        <CartItemCardList className="px-4" />
+        <section className="shadow-top-only z-10 flex mt-auto flex-col gap-6 bg-white p-4">
+          <div className="flex items-center justify-between">
+            <p className="text-lg font-medium">Total</p>
+            <p className="text-lg font-black">{rupiah(total)}</p>
+          </div>
+          <div className="flex items-center justify-center gap-2">
+            <Button
+              variant="outline"
+              size="icon"
+              className="size-11 rounded-full"
+              onClick={handleCloseClick}
+            >
+              <ArrowDown className="size-4 shrink-0" />
+            </Button>
+            <CheckoutDrawer />
           </div>
         </section>
       </DrawerContent>

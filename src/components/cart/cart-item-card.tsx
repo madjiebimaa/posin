@@ -5,18 +5,28 @@ import { Minus, Plus, Trash } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import { CartItem } from "@/lib/types";
-import { rupiah } from "@/lib/utils";
+import { cn, rupiah } from "@/lib/utils";
 import { useCartActions } from "@/store/cart";
 
-interface CartItemCardProps {
+interface CartItemCardProps extends React.ComponentPropsWithoutRef<"div"> {
   item: CartItem;
 }
 
-export default function CartItemCard({ item }: CartItemCardProps) {
+export default function CartItemCard({
+  item,
+  className,
+  ...props
+}: CartItemCardProps) {
   const cartActions = useCartActions();
 
   return (
-    <div className="flex h-28 flex-col justify-between rounded-md bg-white p-4 shadow-sm sm:h-24">
+    <div
+      className={cn(
+        "flex h-28 flex-col justify-between rounded-md bg-white p-4 shadow-sm sm:h-24",
+        className,
+      )}
+      {...props}
+    >
       <p className="text-pretty font-normal">{item.product.name}</p>
       <div className="flex items-center justify-between">
         <p className="font-bold">{rupiah(item.product.price)}</p>

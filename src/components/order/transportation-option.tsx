@@ -2,33 +2,36 @@
 
 import { Button } from "@/components/ui/button";
 
-import { PaymentMethodOption as Option } from "@/lib/types";
+import { TransportationOption as Option } from "@/lib/types";
 import { useCart } from "@/store/cart";
 import { useOrder, useOrderActions } from "@/store/order";
 
-interface PaymentMethodOptionProps {
+interface TransportationOptionProps {
   option: Option;
 }
 
-export default function PaymentMethodOption({
+export default function TransportationOption({
   option,
-}: PaymentMethodOptionProps) {
+}: TransportationOptionProps) {
   const cart = useCart();
   const order = useOrder();
   const orderActions = useOrderActions();
 
-  const isSelectedPaymentMethod = order.paymentMethod === option.id;
+  const isSelectedTransportation =
+    order.isNeedShipped &&
+    order.shipping &&
+    order.shipping.transportation === option.id;
 
   const Icon = option.icon;
 
   return (
     <div className="flex flex-col items-center justify-center gap-1">
       <Button
-        variant={isSelectedPaymentMethod ? "default" : "outline"}
+        variant={isSelectedTransportation ? "default" : "outline"}
         size="sm"
         className="w-full shrink-0"
-        disabled={cart.length === 0}
-        onClick={() => orderActions.selectPaymentMethod(option.id)}
+        disabled={cart.length === 0 || !order.isNeedShipped}
+        onClick={() => orderActions.selectTransportation(option.id)}
       >
         <Icon className="size-6 shrink-0" />
       </Button>

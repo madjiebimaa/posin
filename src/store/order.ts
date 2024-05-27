@@ -1,25 +1,43 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-import { DEFAULT_PAYMENT_METHOD } from "@/lib/constants";
-import { AddOrderArgs, Order, PaymentMethod } from "@/lib/types";
+import {
+  DEFAULT_PAYMENT_METHOD,
+  DEFAULT_SHIPPING_TRANSPORTATION,
+} from "@/lib/constants";
+import {
+  AddOrderArgs,
+  Order,
+  PaymentMethod,
+  ShippingTransportation,
+} from "@/lib/types";
 import { nanoid } from "@/lib/utils";
 
 type OrderState = {
   orders: Order[];
-  paymentMethod: PaymentMethod;
+  order: {
+    isNeedShipped: boolean;
+    shipping: Order["shipping"];
+    paymentMethod: Order["paymentMethod"];
+  };
 };
 
 type OrderActions = {
   actions: {
     addOrder: (args: AddOrderArgs) => void;
+    toggleIsNeedShipped: () => void;
+    selectTransportation: (transportation: ShippingTransportation) => void;
     selectPaymentMethod: (paymentMethod: PaymentMethod) => void;
   };
 };
 
 const initialState: OrderState = {
   orders: [],
-  paymentMethod: DEFAULT_PAYMENT_METHOD,
+  order: {
+    isNeedShipped: false,
+    shipping: null,
+    paymentMethod: DEFAULT_PAYMENT_METHOD,
+  },
 };
 
 const orderStore = create<OrderState & OrderActions>()(
@@ -27,7 +45,7 @@ const orderStore = create<OrderState & OrderActions>()(
     (set) => ({
       ...initialState,
       actions: {
-        addOrder: ({ customer, cart, paymentMethod }) =>
+        addOrder: ({ customer, cart }) =>
           set((state) => ({
             orders: [
               ...state.orders,
@@ -35,14 +53,46 @@ const orderStore = create<OrderState & OrderActions>()(
                 id: nanoid(),
                 customer,
                 cart,
-                paymentMethod,
+                shipping: state.order.shipping,
+                paymentMethod: state.order.paymentMethod,
                 createdAt: new Date(),
                 updatedAt: new Date(),
               },
             ],
-            paymentMethod: DEFAULT_PAYMENT_METHOD,
+            order: initialState["order"],
           })),
-        selectPaymentMethod: (paymentMethod) => set(() => ({ paymentMethod })),
+        toggleIsNeedShipped: () =>
+          set((state) => {
+            const nextIsNeedShipped = !state.order.isNeedShipped;
+            return {
+              order: {
+                ...state.order,
+                isNeedShipped: nextIsNeedShipped,
+                shipping: nextIsNeedShipped
+                  ? {
+                      address: null,
+                      transportation: DEFAULT_SHIPPING_TRANSPORTATION,
+                    }
+                  : null,
+              },
+            };
+          }),
+        selectTransportation: (transportation) =>
+          set((state) => ({
+            order: state.order.isNeedShipped
+              ? {
+                  ...state.order,
+                  shipping: state.order.shipping
+                    ? {
+                        ...state.order.shipping,
+                        transportation,
+                      }
+                    : { address: null, transportation },
+                }
+              : state.order,
+          })),
+        selectPaymentMethod: (paymentMethod) =>
+          set((state) => ({ order: { ...state.order, paymentMethod } })),
       },
     }),
     {
@@ -54,5 +104,5 @@ const orderStore = create<OrderState & OrderActions>()(
 );
 
 export const useOrders = () => orderStore((state) => state.orders);
-export const usePaymentMethod = () => orderStore(state => state.paymentMethod)
+export const useOrder = () => orderStore((state) => state.order);
 export const useOrderActions = () => orderStore((state) => state.actions);
