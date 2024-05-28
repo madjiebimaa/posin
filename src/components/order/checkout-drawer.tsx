@@ -5,6 +5,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 import AddressInput from "@/components/order/address-input";
+import CustomerCombobox from "@/components/order/customer-combobox";
 import PaymentMethodOptionList from "@/components/order/payment-method-option-list";
 import ShippingSwitch from "@/components/order/shipping-switch";
 import TransportationOptionList from "@/components/order/transportation-option-list";
@@ -15,17 +16,21 @@ import {
   DrawerNested,
   DrawerTitle,
 } from "@/components/ui/drawer";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 import { rupiah } from "@/lib/utils";
 import { useCart, useCartActions } from "@/store/cart";
+import { useCustomer, useCustomerActions } from "@/store/customer";
 import { useOrder, useOrderActions } from "@/store/order";
 
 export default function CheckoutDrawer() {
   const [open, setOpen] = useState(false);
   const order = useOrder();
+  const orderActions = useOrderActions();
+  const customer = useCustomer();
+  const customerActions = useCustomerActions();
   const cart = useCart();
   const cartActions = useCartActions();
-  const orderActions = useOrderActions();
 
   const isCartEmpty = cart.length === 0;
 
@@ -40,13 +45,16 @@ export default function CheckoutDrawer() {
 
   const handleCloseClick = () => setOpen(false);
 
+  console.log({ customer });
+
   const handlePlaceOrderClick = () => {
     orderActions.addOrder({
-      customer: null,
+      customer,
       cart,
     });
 
     cartActions.reset();
+    customerActions.reset();
     toast.info(
       "Your order has been placed successfully! Thank you for shopping with us.",
     );
@@ -65,7 +73,7 @@ export default function CheckoutDrawer() {
         Checkout
       </Button>
       <DrawerContent
-        className="mx-auto h-[93dvh] max-w-xl bg-[#F5F6F7] sm:h-[95dvh]"
+        className="mx-auto h-[97dvh] max-w-xl bg-[#F5F6F7] sm:h-[95dvh]"
         handleClassName="bg-white"
       >
         <DrawerHeader className="sm:text-center">
@@ -78,15 +86,22 @@ export default function CheckoutDrawer() {
             )}
           </DrawerTitle>
         </DrawerHeader>
-        <section className="flex-1 px-4 pb-4">
-          <div className="flex h-full flex-col gap-6 rounded-md bg-white p-4 shadow-sm">
-            <ShippingSwitch />
-            {order.isNeedShipped && <AddressInput />}
-            {order.isNeedShipped && <TransportationOptionList />}
-            <PaymentMethodOptionList className="mt-auto" />
+        <ScrollArea className="flex-1 px-4">
+          <div className="flex flex-col gap-2">
+            <div className="flex flex-col rounded-md bg-white p-4 shadow-sm">
+              <CustomerCombobox />
+            </div>
+            <div className="flex flex-col gap-4 rounded-md bg-white p-4 shadow-sm">
+              <ShippingSwitch />
+              {order.isNeedShipped && <AddressInput />}
+              {order.isNeedShipped && <TransportationOptionList />}
+            </div>
+            <div className="mb-2 flex flex-col gap-4 rounded-md bg-white p-4 shadow-sm">
+              <PaymentMethodOptionList />
+            </div>
           </div>
-        </section>
-        <section className="shadow-top-only z-10 mt-auto flex flex-col gap-6 bg-white p-4">
+        </ScrollArea>
+        <section className="z-10 mt-auto flex flex-col gap-6 bg-white p-4 shadow-top-only">
           <div className="flex items-center justify-between">
             <p className="text-lg font-medium">Total</p>
             <p className="text-lg font-black">{rupiah(total)}</p>

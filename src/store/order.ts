@@ -65,7 +65,7 @@ const orderStore = create<OrderState & OrderActions>()(
         toggleIsNeedShipped: () =>
           set((state) => {
             const nextIsNeedShipped = !state.order.isNeedShipped;
-            
+
             return {
               order: {
                 ...state.order,
@@ -117,7 +117,7 @@ const orderStore = create<OrderState & OrderActions>()(
     {
       name: "order-storage",
       storage: createJSONStorage(() => localStorage),
-      partialize: (state) => ({ orders: state.orders }),
+      partialize: (state) => ({ orders: state.orders, order: state.order }),
     },
   ),
 );

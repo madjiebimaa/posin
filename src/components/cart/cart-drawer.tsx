@@ -49,7 +49,7 @@ export default function CartDrawer() {
         <ShoppingCart className="size-4 shrink-0" />
       </Button>
       <DrawerContent
-        className="mx-auto flex h-[95dvh] max-w-xl flex-col bg-[#F5F6F7]"
+        className="mx-auto flex h-[99dvh] max-w-xl flex-col bg-[#F5F6F7]"
         handleClassName="bg-white"
       >
         <DrawerHeader className="sm:text-center">

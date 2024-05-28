@@ -26,7 +26,6 @@ export type Cart = CartItem[];
 export type Customer = {
   id: string;
   name: string;
-  address: string;
 };
 
 export type PaymentMethod = "CASH" | "DEBIT_CARD" | "E-WALLET";

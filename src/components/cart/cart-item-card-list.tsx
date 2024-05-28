@@ -24,7 +24,7 @@ export default function CartItemCardList({
           <CartItemCard
             key={item.product.id}
             item={item}
-            className={cn(cart.length - 1 === index && "mb-4")}
+            className={cn(cart.length - 1 === index && "mb-2")}
           />
         ))}
       </section>

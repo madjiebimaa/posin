@@ -3,10 +3,6 @@ import { CircleDollarSign, CreditCard, QrCode } from "lucide-react";
 import PaymentMethodOption from "@/components/order/payment-method-option";
 
 import { PaymentMethodOption as Option } from "@/lib/types";
-import { cn } from "@/lib/utils";
-
-interface PaymentMethodOptionListProps
-  extends React.ComponentPropsWithoutRef<"div"> {}
 
 const options: Option[] = [
   { id: "CASH", label: "Cash", icon: CircleDollarSign },
@@ -14,12 +10,9 @@ const options: Option[] = [
   { id: "E-WALLET", label: "E-Wallet", icon: QrCode },
 ];
 
-export default function PaymentMethodOptionList({
-  className,
-  ...props
-}: PaymentMethodOptionListProps) {
+export default function PaymentMethodOptionList() {
   return (
-    <div className={cn("flex flex-col gap-2", className)} {...props}>
+    <div className="flex flex-col gap-2">
       <p className="font-normal text-muted-foreground">Payment Method</p>
       <section className="grid grid-cols-3 gap-2">
         {options.map((option) => (
