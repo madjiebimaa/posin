@@ -14,7 +14,7 @@ const options: Option[] = [
 export default function TransportationOptionList() {
   return (
     <div className="flex flex-col gap-2">
-      <p className="font-normal text-muted-foreground">Transportation</p>
+      <p className="font-normal text-slate-500">Transportation</p>
       <section className="grid grid-cols-4 gap-2">
         {options.map((option) => (
           <TransportationOption key={option.id} option={option} />

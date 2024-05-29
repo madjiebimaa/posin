@@ -20,14 +20,14 @@ export default function ProductSearch({
   return (
     <div className="relative max-w-[300px]">
       <Label htmlFor="product-search" className="absolute left-3 top-3">
-        <Search className="size-4 shrink-0 text-muted-foreground" />
+        <Search className="size-4 shrink-0 text-slate-500" />
       </Label>
       <Input
         id="product-search"
         type="search"
         autoComplete="off"
         placeholder="Search"
-        className={cn("border-none pl-10 shadow-sm", className)}
+        className={cn("rounded-xl border-none bg-slate-100 pl-10", className)}
         defaultValue={query}
         onChange={(event) => setQuery(event.target.value)}
         {...props}

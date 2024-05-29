@@ -15,7 +15,7 @@ export default function AddressInput() {
     <section className="flex flex-col gap-2">
       <Label
         htmlFor="shipping-address"
-        className="text-base font-normal text-muted-foreground"
+        className="text-base font-normal text-slate-500"
       >
         Address
       </Label>

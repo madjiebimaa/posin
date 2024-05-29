@@ -13,7 +13,7 @@ const options: Option[] = [
 export default function PaymentMethodOptionList() {
   return (
     <div className="flex flex-col gap-2">
-      <p className="font-normal text-muted-foreground">Payment Method</p>
+      <p className="font-normal text-slate-500">Payment Method</p>
       <section className="grid grid-cols-3 gap-2">
         {options.map((option) => (
           <PaymentMethodOption key={option.id} option={option} />

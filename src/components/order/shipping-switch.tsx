@@ -22,7 +22,7 @@ export default function ShippingSwitch() {
 
   return (
     <section className="flex flex-col gap-2">
-      <p className="font-normal text-muted-foreground">Shipping Options</p>
+      <p className="font-normal text-slate-500">Shipping Options</p>
       <div className="flex flex-col gap-1">
         <div className="flex items-center justify-between">
           <p className="text-sm font-semibold">Ship this order</p>
@@ -31,7 +31,7 @@ export default function ShippingSwitch() {
             onCheckedChange={handleSwitchClick}
           />
         </div>
-        <p className="pr-[50px] text-xs text-muted-foreground">
+        <p className="pr-[50px] text-xs text-slate-500">
           If you want this order to be shipped, enable this option.
         </p>
       </div>

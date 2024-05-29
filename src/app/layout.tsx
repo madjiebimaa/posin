@@ -24,7 +24,10 @@ export default function RootLayout({
     <html lang="en">
       <body
         suppressHydrationWarning
-        className={cn("bg-[#F5F6F7] antialiased", inter.className)}
+        className={cn(
+          "bg-slate-50 text-slate-900 antialiased",
+          inter.className,
+        )}
       >
         {children}
         <ClientOnly>

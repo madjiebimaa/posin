@@ -1,10 +1,16 @@
 import { LucideIcon } from "lucide-react";
 
+export type CategoryName =
+  | "Flooring Materials"
+  | "Fasteners and Hardware"
+  | "Electrical Supplies"
+  | "Concrete and Masonry"
+  | "Painting Supplies"
+  | "Plumbing Materials";
+
 export type Category = {
   id: string;
-  name: string;
-  color: string;
-  icon: LucideIcon;
+  name: CategoryName;
 };
 
 export type Product = {
@@ -65,6 +71,12 @@ export type RGB = {
   r: number;
   g: number;
   b: number;
+};
+
+export type TailwindColor = {
+  text: string;
+  background: string;
+  border: string;
 };
 
 export type AddOrderArgs = Omit<

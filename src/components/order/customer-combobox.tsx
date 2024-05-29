@@ -47,7 +47,7 @@ export default function CustomerCombobox() {
     <section className="flex flex-col gap-2">
       <Label
         htmlFor="customer"
-        className="text-base font-normal text-muted-foreground"
+        className="text-base font-normal text-slate-500"
       >
         Customer
       </Label>
@@ -57,10 +57,10 @@ export default function CustomerCombobox() {
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            className="w-[260px] justify-between"
+            className="w-[260px] justify-between hover:bg-white hover:opacity-80"
           >
             {selectedCustomer ? selectedCustomer.name : "Select a customer..."}
-            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 text-slate-500" />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-[260px] p-0">

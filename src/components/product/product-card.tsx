@@ -1,9 +1,7 @@
 "use client";
 
-import { useState } from "react";
-
 import { Product } from "@/lib/types";
-import { cn, lightenColor, rupiah } from "@/lib/utils";
+import { cn, getCategoryAttributes, rupiah } from "@/lib/utils";
 import { useCart, useCartActions } from "@/store/cart";
 import { useCategories } from "@/store/category";
 
@@ -16,7 +14,6 @@ export default function ProductCard({
   className,
   ...props
 }: ProductCardProps) {
-  const [isHovered, setIsHovered] = useState(false);
   const categories = useCategories();
   const cart = useCart();
   const cartActions = useCartActions();
@@ -29,33 +26,16 @@ export default function ProductCard({
     (category) => category.id === product.categoryId,
   )!;
 
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
+  const { color: categoryColor } = getCategoryAttributes(productCategory.name);
 
   return (
     <div
-      style={{
-        backgroundColor:
-          isProductSelected && isHovered
-            ? lightenColor(productCategory.color, 30)
-            : isProductSelected
-              ? productCategory.color
-              : "white",
-        borderLeftColor: isHovered
-          ? lightenColor(productCategory.color, 30)
-          : productCategory.color,
-      }}
       className={cn(
-        "flex h-36 cursor-pointer flex-col justify-between rounded-md border-l-8 p-4 shadow-sm transition-colors ease-out sm:h-24",
+        "flex h-36 cursor-pointer flex-col justify-between rounded-xl border-l-8 bg-slate-100 p-4 transition-colors hover:opacity-80 sm:h-24",
+        categoryColor.border,
+        isProductSelected && categoryColor.background,
         className,
       )}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
       onClick={() => cartActions.toggleItem(product)}
       {...props}
     >

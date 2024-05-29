@@ -6,13 +6,12 @@ import {
   InspectionPanel,
   LucideIcon,
   PaintRoller,
-  Star,
   Zap,
 } from "lucide-react";
 import { customAlphabet } from "nanoid";
 import { twMerge } from "tailwind-merge";
 
-import { Category, Product, RGB } from "@/lib/types";
+import { Category, Product, RGB, TailwindColor } from "@/lib/types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -31,22 +30,65 @@ export function nanoid(size: number = 10) {
   return customAlphabet("1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ-", size)();
 }
 
-export function getCategoryIcon(name: string): LucideIcon {
+export function getCategoryAttributes(name: Category["name"]): {
+  icon: LucideIcon;
+  color: TailwindColor;
+} {
   switch (name) {
-    case "InspectionPanel":
-      return InspectionPanel;
-    case "Bolt":
-      return Bolt;
-    case "Zap":
-      return Zap;
-    case "Cuboid":
-      return Cuboid;
-    case "PaintRoller":
-      return PaintRoller;
-    case "Droplet":
-      return Droplet;
-    default:
-      return Star;
+    case "Flooring Materials":
+      return {
+        icon: InspectionPanel,
+        color: {
+          text: "text-purple-400",
+          background: "bg-purple-400",
+          border: "border-purple-400",
+        },
+      };
+    case "Fasteners and Hardware":
+      return {
+        icon: Bolt,
+        color: {
+          text: "text-emerald-400",
+          background: "bg-emerald-400",
+          border: "border-emerald-400",
+        },
+      };
+    case "Electrical Supplies":
+      return {
+        icon: Zap,
+        color: {
+          text: "text-amber-400",
+          background: "bg-amber-400",
+          border: "border-amber-400",
+        },
+      };
+    case "Concrete and Masonry":
+      return {
+        icon: Cuboid,
+        color: {
+          text: "text-orange-400",
+          background: "bg-orange-400",
+          border: "border-orange-400",
+        },
+      };
+    case "Painting Supplies":
+      return {
+        icon: PaintRoller,
+        color: {
+          text: "text-rose-400",
+          background: "bg-rose-400",
+          border: "border-rose-400",
+        },
+      };
+    case "Plumbing Materials":
+      return {
+        icon: Droplet,
+        color: {
+          text: "text-sky-400",
+          background: "bg-sky-400",
+          border: "border-sky-400",
+        },
+      };
   }
 }
 

@@ -70,10 +70,7 @@ export default function CheckoutDrawer() {
       >
         Checkout
       </Button>
-      <DrawerContent
-        className="mx-auto h-[97dvh] max-w-xl bg-[#F5F6F7] sm:h-[95dvh]"
-        handleClassName="bg-white"
-      >
+      <DrawerContent className="mx-auto h-[93dvh] max-w-xl">
         <DrawerHeader className="sm:text-center">
           <DrawerTitle>
             <span>Checkout</span>
@@ -86,20 +83,20 @@ export default function CheckoutDrawer() {
         </DrawerHeader>
         <ScrollArea className="flex-1 px-4">
           <div className="flex flex-col gap-2">
-            <div className="flex flex-col rounded-md bg-white p-4 shadow-sm">
+            <div className="flex flex-col rounded-xl bg-slate-100 p-4">
               <CustomerCombobox />
             </div>
-            <div className="flex flex-col gap-4 rounded-md bg-white p-4 shadow-sm">
+            <div className="flex flex-col gap-4 rounded-xl bg-slate-100 p-4">
               <ShippingSwitch />
               {order.isNeedShipped && <AddressInput />}
               {order.isNeedShipped && <TransportationOptionList />}
             </div>
-            <div className="mb-2 flex flex-col gap-4 rounded-md bg-white p-4 shadow-sm">
+            <div className="mb-2 flex flex-col gap-4 rounded-xl bg-slate-100 p-4">
               <PaymentMethodOptionList />
             </div>
           </div>
         </ScrollArea>
-        <section className="z-10 mt-auto flex flex-col gap-6 bg-white p-4 shadow-top-only">
+        <section className="z-10 mt-auto flex flex-col gap-6 bg-slate-100 p-4 shadow-top-only">
           <div className="flex items-center justify-between">
             <p className="text-lg font-medium">Total</p>
             <p className="text-lg font-black">{rupiah(total)}</p>

@@ -27,21 +27,19 @@ export default function PaymentMethodOption({
       <Button
         variant={isSelectedPaymentMethod ? "default" : "outline"}
         size="sm"
-        className="w-full shrink-0 transition-colors"
-        disabled={cart.length === 0}
+        className={cn(
+          "w-full shrink-0 transition-colors",
+          !isSelectedPaymentMethod &&
+            "text-slate-500 hover:bg-white hover:text-slate-900",
+        )}
         onClick={() => orderActions.selectPaymentMethod(option.id)}
       >
-        <Icon
-          className={cn(
-            "size-6 shrink-0",
-            !isSelectedPaymentMethod && "text-muted-foreground",
-          )}
-        />
+        <Icon className={cn("size-6 shrink-0")} />
       </Button>
       <span
         className={cn(
-          "text-center text-sm font-normal",
-          !isSelectedPaymentMethod && "text-muted-foreground",
+          "text-center text-sm text-slate-500",
+          isSelectedPaymentMethod && "text-slate-900",
         )}
       >
         {option.label}

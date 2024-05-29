@@ -48,18 +48,16 @@ export default function CartDrawer() {
     <Drawer open={open} onOpenChange={setOpen} dismissible={false}>
       <Button
         variant="ghost"
+        size="icon"
         onClick={handleTriggerClick}
-        className="relative shrink-0"
+        className="relative shrink-0 rounded-xl"
       >
-        <ShoppingCart className="size-6 shrink-0 text-muted-foreground" />
-        <span className="absolute right-1 top-1 flex size-5 items-center justify-center rounded-full border border-white bg-red-500 text-xs font-semibold text-white">
+        <ShoppingCart className="size-6 shrink-0" />
+        <span className="absolute -right-1 -top-1 z-10 flex size-5 items-center justify-center rounded-full border border-white bg-red-500 text-xs font-medium text-white">
           {quantity}
         </span>
       </Button>
-      <DrawerContent
-        className="mx-auto flex h-[99dvh] max-w-xl flex-col bg-[#F5F6F7]"
-        handleClassName="bg-white"
-      >
+      <DrawerContent className="mx-auto h-[95dvh] max-w-xl">
         <DrawerHeader className="sm:text-center">
           <DrawerTitle>
             <span>Your Shopping Cart</span>
@@ -71,7 +69,7 @@ export default function CartDrawer() {
           </DrawerTitle>
         </DrawerHeader>
         <CartItemCardList className="px-4" />
-        <section className="z-10 mt-auto flex flex-col gap-6 bg-white p-4 shadow-top-only">
+        <section className="z-10 mt-auto flex flex-col gap-6 bg-slate-100 p-4 shadow-top-only">
           <div className="flex items-center justify-between">
             <p className="text-lg font-medium">Total</p>
             <p className="text-lg font-black">{rupiah(total)}</p>

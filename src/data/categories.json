@@ -1,38 +1,26 @@
 [
   {
     "id": "BC7UTJ6QLQ",
-    "name": "Flooring Materials",
-    "color": "#EDE9FE",
-    "icon": "InspectionPanel"
+    "name": "Flooring Materials"
   },
   {
     "id": "DEYNRY6F--",
-    "name": "Fasteners and Hardware",
-    "color": "#DCfCE7",
-    "icon": "Bolt"
+    "name": "Fasteners and Hardware"
   },
   {
     "id": "VC4WHE4912",
-    "name": "Electrical Supplies",
-    "color": "#FEF9C3",
-    "icon": "Zap"
+    "name": "Electrical Supplies"
   },
   {
     "id": "NBL0VVJ5HA",
-    "name": "Concrete and Masonry",
-    "color": "#FFEDD5",
-    "icon": "Cuboid"
+    "name": "Concrete and Masonry"
   },
   {
     "id": "VT59KJ-SDU",
-    "name": "Painting Supplies",
-    "color": "#FEE2E2",
-    "icon": "PaintRoller"
+    "name": "Painting Supplies"
   },
   {
     "id": "FTG5HYZQSU",
-    "name": "Plumbing Materials",
-    "color": "#DBEAFE",
-    "icon": "Droplet"
+    "name": "Plumbing Materials"
   }
 ]
