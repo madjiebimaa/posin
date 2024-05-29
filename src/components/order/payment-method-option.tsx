@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 
 import { PaymentMethodOption as Option } from "@/lib/types";
+import { cn } from "@/lib/utils";
 import { useCart } from "@/store/cart";
 import { useOrder, useOrderActions } from "@/store/order";
 
@@ -26,13 +27,25 @@ export default function PaymentMethodOption({
       <Button
         variant={isSelectedPaymentMethod ? "default" : "outline"}
         size="sm"
-        className="w-full shrink-0"
+        className="w-full shrink-0 transition-colors"
         disabled={cart.length === 0}
         onClick={() => orderActions.selectPaymentMethod(option.id)}
       >
-        <Icon className="size-6 shrink-0" />
+        <Icon
+          className={cn(
+            "size-6 shrink-0",
+            !isSelectedPaymentMethod && "text-muted-foreground",
+          )}
+        />
       </Button>
-      <span className="text-center text-sm font-normal">{option.label}</span>
+      <span
+        className={cn(
+          "text-center text-sm font-normal",
+          !isSelectedPaymentMethod && "text-muted-foreground",
+        )}
+      >
+        {option.label}
+      </span>
     </div>
   );
 }

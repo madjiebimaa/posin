@@ -1,4 +1,3 @@
-import { Menu } from "lucide-react";
 import { Suspense } from "react";
 
 import CartDrawer from "@/components/cart/cart-drawer";
@@ -8,22 +7,16 @@ import ProductSearch from "@/components/product/product-search";
 import CategoryCardListSkeleton from "@/components/skeleton/category-card-list-skeleton";
 import ProductCardListSkeleton from "@/components/skeleton/product-card-list-skeleton";
 import ProductSearchSkeleton from "@/components/skeleton/product-search-skeleton";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
 export default function Home() {
   return (
     <main className="mx-auto flex h-dvh max-w-xl flex-col">
-      <section className="flex items-center justify-between px-4 py-2">
-        <Button variant="ghost" size="icon" className="shrink-0">
-          <Menu className="size-4 shrink-0" />
-        </Button>
-        <CartDrawer />
-      </section>
-      <section className="px-4 py-2">
+      <section className="flex items-center justify-between gap-2 p-4">
         <Suspense fallback={<ProductSearchSkeleton />}>
           <ProductSearch />
         </Suspense>
+        <CartDrawer />
       </section>
       <Suspense fallback={<CategoryCardListSkeleton />}>
         <CategoryCardList className="mb-2 ml-4 py-4" />
@@ -32,7 +25,7 @@ export default function Home() {
         <Separator />
       </div>
       <Suspense fallback={<ProductCardListSkeleton />}>
-        <ProductCardList className="mb-2 mt-6 px-4" />
+        <ProductCardList className="mt-6 px-4" />
       </Suspense>
     </main>
   );

@@ -36,8 +36,12 @@ export default function ProductCardList({
   return filteredProducts.length !== 0 ? (
     <ScrollArea className={cn("flex-1", className)} {...props}>
       <div className="grid grid-cols-2 gap-2">
-        {filteredProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
+        {filteredProducts.map((product, index) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            className={cn(filteredProducts.length >= index - 2 && "mb-2")}
+          />
         ))}
       </div>
     </ScrollArea>

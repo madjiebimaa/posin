@@ -20,14 +20,14 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 import { rupiah } from "@/lib/utils";
 import { useCart, useCartActions } from "@/store/cart";
-import { useCustomer, useCustomerActions } from "@/store/customer";
+import { useCustomerActions, useSelectedCustomer } from "@/store/customer";
 import { useOrder, useOrderActions } from "@/store/order";
 
 export default function CheckoutDrawer() {
   const [open, setOpen] = useState(false);
   const order = useOrder();
   const orderActions = useOrderActions();
-  const customer = useCustomer();
+  const selectedCustomer = useSelectedCustomer();
   const customerActions = useCustomerActions();
   const cart = useCart();
   const cartActions = useCartActions();
@@ -45,11 +45,9 @@ export default function CheckoutDrawer() {
 
   const handleCloseClick = () => setOpen(false);
 
-  console.log({ customer });
-
   const handlePlaceOrderClick = () => {
     orderActions.addOrder({
-      customer,
+      customer: selectedCustomer,
       cart,
     });
 

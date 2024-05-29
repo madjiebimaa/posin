@@ -22,24 +22,23 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 import { cn } from "@/lib/utils";
-import { useCustomerActions, useCustomers } from "@/store/customer";
+import {
+  useCustomerActions,
+  useCustomers,
+  useSelectedCustomer,
+} from "@/store/customer";
 
 export default function CustomerCombobox() {
   const [open, setOpen] = useState(false);
-  const [name, setName] = useState("");
+  const selectedCustomer = useSelectedCustomer();
   const customers = useCustomers();
   const customerActions = useCustomerActions();
-
-  const selectedCustomer = customers.find(
-    (customer) => customer.name === name,
-  )!;
 
   const handleSelect = (nextName: string) => {
     const nextCustomer = customers.find(
       (customer) => customer.name === nextName,
     )!;
 
-    setName(nextName !== name ? nextName : "");
     customerActions.selectCustomer(nextCustomer);
     setOpen(false);
   };
@@ -60,13 +59,16 @@ export default function CustomerCombobox() {
             aria-expanded={open}
             className="w-[260px] justify-between"
           >
-            {name ? selectedCustomer.name : "Select a customer..."}
+            {selectedCustomer ? selectedCustomer.name : "Select a customer..."}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-[260px] p-0">
           <Command>
-            <CommandInput placeholder="Search by customer name..." />
+            <CommandInput
+              autoComplete="off"
+              placeholder="Search by customer name..."
+            />
             <CommandEmpty className="p-4">
               <AddCustomerButton />
             </CommandEmpty>
@@ -83,7 +85,10 @@ export default function CustomerCombobox() {
                       <Check
                         className={cn(
                           "mr-2 h-4 w-4 shrink-0 transition-opacity",
-                          name === customer.name ? "opacity-100" : "opacity-0",
+                          selectedCustomer &&
+                            selectedCustomer.name === customer.name
+                            ? "opacity-100"
+                            : "opacity-0",
                         )}
                       />
                       {customer.name}

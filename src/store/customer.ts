@@ -6,7 +6,7 @@ import { nanoid } from "@/lib/utils";
 
 type CustomerState = {
   customers: Customer[];
-  customer: Customer | null;
+  selectedCustomer: Customer | null;
 };
 
 type CustomerActions = {
@@ -19,7 +19,7 @@ type CustomerActions = {
 
 const initialState: CustomerState = {
   customers: [],
-  customer: null,
+  selectedCustomer: null,
 };
 
 const customerStore = create<CustomerState & CustomerActions>()(
@@ -33,14 +33,16 @@ const customerStore = create<CustomerState & CustomerActions>()(
           })),
         selectCustomer: (customer) =>
           set((state) => ({
-            customer:
-              state.customer && state.customer.id !== customer.id
+            selectedCustomer:
+              state.selectedCustomer &&
+              state.selectedCustomer.id !== customer.id
                 ? customer
-                : !state.customer
+                : !state.selectedCustomer
                   ? customer
                   : null,
           })),
-        reset: () => set(() => ({ customer: initialState["customer"] })),
+        reset: () =>
+          set(() => ({ selectedCustomer: initialState["selectedCustomer"] })),
       },
     }),
     {
@@ -48,12 +50,13 @@ const customerStore = create<CustomerState & CustomerActions>()(
       storage: createJSONStorage(() => localStorage),
       partialize: (state) => ({
         customers: state.customers,
-        customer: state.customer,
+        selectedCustomer: state.selectedCustomer,
       }),
     },
   ),
 );
 
 export const useCustomers = () => customerStore((state) => state.customers);
-export const useCustomer = () => customerStore((state) => state.customer);
+export const useSelectedCustomer = () =>
+  customerStore((state) => state.selectedCustomer);
 export const useCustomerActions = () => customerStore((state) => state.actions);

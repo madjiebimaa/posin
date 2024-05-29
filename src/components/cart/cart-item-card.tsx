@@ -22,19 +22,19 @@ export default function CartItemCard({
   return (
     <div
       className={cn(
-        "flex h-28 flex-col justify-between rounded-md bg-white p-4 shadow-sm sm:h-24",
+        "flex h-24 flex-col justify-between rounded-md bg-white p-4 shadow-sm sm:h-20",
         className,
       )}
       {...props}
     >
-      <p className="text-pretty font-normal">{item.product.name}</p>
+      <p className="text-pretty text-sm font-normal">{item.product.name}</p>
       <div className="flex items-center justify-between">
-        <p className="font-bold">{rupiah(item.product.price)}</p>
+        <p className="text-sm font-bold">{rupiah(item.product.price)}</p>
         <div className="flex items-center gap-4">
           <Button
             variant="ghost"
             size="icon"
-            className="size-6 shrink-0"
+            className="size-6 shrink-0 text-muted-foreground"
             onClick={() => cartActions.deleteItem(item.product.id)}
           >
             <Trash className="size-4 shrink-0" />
@@ -43,7 +43,7 @@ export default function CartItemCard({
             <Button
               variant="ghost"
               size="icon"
-              className="size-6 shrink-0 rounded-r-none"
+              className="size-6 shrink-0 rounded-r-none text-muted-foreground"
               onClick={() => cartActions.decreaseItemQuantity(item.product.id)}
             >
               <Minus className="size-4 shrink-0" />
@@ -54,7 +54,7 @@ export default function CartItemCard({
             <Button
               variant="ghost"
               size="icon"
-              className="size-6 shrink-0 rounded-l-none"
+              className="size-6 shrink-0 rounded-l-none text-muted-foreground"
               onClick={() => cartActions.increaseItemQuantity(item.product.id)}
             >
               <Plus className="size-4 shrink-0" />

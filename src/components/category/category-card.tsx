@@ -50,7 +50,7 @@ export default function CategoryCard({
             : category.color,
       }}
       className={cn(
-        "flex size-44 cursor-pointer flex-col justify-between rounded-md p-4 shadow-sm transition-colors ease-out sm:size-40",
+        "flex h-[100px] w-[200px] cursor-pointer flex-col justify-between rounded-md p-4 shadow-sm transition-colors ease-out",
         className,
       )}
       onMouseEnter={handleMouseEnter}
@@ -58,16 +58,16 @@ export default function CategoryCard({
       onClick={handleClick}
       {...props}
     >
-      <Icon
-        style={{
-          color:
-            isSelectedCategory && isHovered
-              ? darkenColor(category.color, 10)
-              : undefined,
-        }}
-        className="size-6 shrink-0"
-      />
-      <div className="flex flex-col gap-1">
+      <div className="flex gap-2">
+        <Icon
+          style={{
+            color:
+              isSelectedCategory && isHovered
+                ? darkenColor(category.color, 10)
+                : undefined,
+          }}
+          className="size-6 shrink-0"
+        />
         <p
           style={{
             color:
@@ -75,12 +75,12 @@ export default function CategoryCard({
                 ? darkenColor(category.color, 10)
                 : undefined,
           }}
-          className="text-lg font-semibold"
+          className="mt-0.5 text-sm font-semibold"
         >
           {category.name}
         </p>
-        <p className="font-medium text-muted-foreground">{total} items</p>
       </div>
+      <p className="text-xs font-medium text-muted-foreground">{total} items</p>
     </div>
   );
 }

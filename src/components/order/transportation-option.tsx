@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 
 import { TransportationOption as Option } from "@/lib/types";
+import { cn } from "@/lib/utils";
 import { useCart } from "@/store/cart";
 import { useOrder, useOrderActions } from "@/store/order";
 
@@ -29,13 +30,25 @@ export default function TransportationOption({
       <Button
         variant={isSelectedTransportation ? "default" : "outline"}
         size="sm"
-        className="w-full shrink-0"
+        className="w-full shrink-0 transition-colors"
         disabled={cart.length === 0 || !order.isNeedShipped}
         onClick={() => orderActions.selectTransportation(option.id)}
       >
-        <Icon className="size-6 shrink-0" />
+        <Icon
+          className={cn(
+            "size-6 shrink-0",
+            !isSelectedTransportation && "text-muted-foreground",
+          )}
+        />
       </Button>
-      <span className="text-center text-sm font-normal">{option.label}</span>
+      <span
+        className={cn(
+          "text-center text-sm font-normal",
+          !isSelectedTransportation && "text-muted-foreground",
+        )}
+      >
+        {option.label}
+      </span>
     </div>
   );
 }

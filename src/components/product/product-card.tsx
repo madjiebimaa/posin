@@ -51,7 +51,7 @@ export default function ProductCard({
           : productCategory.color,
       }}
       className={cn(
-        "flex h-40 cursor-pointer flex-col justify-between rounded-md border-l-8 p-4 shadow-sm transition-colors ease-out sm:h-32",
+        "flex h-36 cursor-pointer flex-col justify-between rounded-md border-l-8 p-4 shadow-sm transition-colors ease-out sm:h-24",
         className,
       )}
       onMouseEnter={handleMouseEnter}
@@ -59,8 +59,8 @@ export default function ProductCard({
       onClick={() => cartActions.toggleItem(product)}
       {...props}
     >
-      <p className="text-pretty font-normal">{product.name}</p>
-      <p className="font-bold">{rupiah(product.price)}</p>
+      <p className="text-pretty text-sm font-normal">{product.name}</p>
+      <p className="text-sm font-bold">{rupiah(product.price)}</p>
     </div>
   );
 }
