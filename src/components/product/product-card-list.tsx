@@ -28,20 +28,21 @@ export default function ProductCardList({
     (comparedCategory) => comparedCategory.name === category,
   );
 
-  const filteredProducts = applyProductsFilter(products, {
-    query,
-    categoryId: selectedCategory ? selectedCategory.id : "",
-  });
+  const filteredProducts = applyProductsFilter(
+    products.sort((a, b) =>
+      a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1,
+    ),
+    {
+      query,
+      categoryId: selectedCategory ? selectedCategory.id : "",
+    },
+  );
 
   return filteredProducts.length !== 0 ? (
     <ScrollArea className={cn("flex-1", className)} {...props}>
-      <div className="grid grid-cols-2 gap-2">
-        {filteredProducts.map((product, index) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            className={cn(filteredProducts.length >= index - 2 && "mb-2")}
-          />
+      <div className="flex flex-col gap-2">
+        {filteredProducts.map((product) => (
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
     </ScrollArea>

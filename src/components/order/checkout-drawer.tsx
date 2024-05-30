@@ -53,7 +53,7 @@ export default function CheckoutDrawer() {
 
     cartActions.reset();
     customerActions.reset();
-    toast.info(
+    toast.success(
       "Your order has been placed successfully! Thank you for shopping with us.",
     );
 

@@ -6,7 +6,9 @@ export type CategoryName =
   | "Electrical Supplies"
   | "Concrete and Masonry"
   | "Painting Supplies"
-  | "Plumbing Materials";
+  | "Plumbing Materials"
+  | "Construction Tools" 
+  | "Adhesives";
 
 export type Category = {
   id: string;
@@ -77,6 +79,7 @@ export type TailwindColor = {
   text: string;
   background: string;
   border: string;
+  fill: string
 };
 
 export type AddOrderArgs = Omit<

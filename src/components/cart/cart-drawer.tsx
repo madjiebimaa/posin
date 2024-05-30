@@ -53,7 +53,7 @@ export default function CartDrawer() {
         className="relative shrink-0 rounded-xl"
       >
         <ShoppingCart className="size-6 shrink-0" />
-        <span className="absolute -right-1 -top-1 z-10 flex size-5 items-center justify-center rounded-full border border-white bg-red-500 text-xs font-medium text-white">
+        <span className="absolute right-0.5 top-0.5 z-10 flex size-5 items-center justify-center rounded-full border border-white bg-red-500 text-xs font-medium text-white">
           {quantity}
         </span>
       </Button>

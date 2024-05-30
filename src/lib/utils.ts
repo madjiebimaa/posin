@@ -1,5 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 import {
+  Axe,
+  Blend,
   Bolt,
   Cuboid,
   Droplet,
@@ -42,6 +44,7 @@ export function getCategoryAttributes(name: Category["name"]): {
           text: "text-purple-400",
           background: "bg-purple-400",
           border: "border-purple-400",
+          fill: "fill-purple-400",
         },
       };
     case "Fasteners and Hardware":
@@ -51,6 +54,7 @@ export function getCategoryAttributes(name: Category["name"]): {
           text: "text-emerald-400",
           background: "bg-emerald-400",
           border: "border-emerald-400",
+          fill: "fill-emerald-400",
         },
       };
     case "Electrical Supplies":
@@ -60,6 +64,7 @@ export function getCategoryAttributes(name: Category["name"]): {
           text: "text-amber-400",
           background: "bg-amber-400",
           border: "border-amber-400",
+          fill: "fill-amber-400",
         },
       };
     case "Concrete and Masonry":
@@ -69,6 +74,7 @@ export function getCategoryAttributes(name: Category["name"]): {
           text: "text-orange-400",
           background: "bg-orange-400",
           border: "border-orange-400",
+          fill: "fill-orange-400",
         },
       };
     case "Painting Supplies":
@@ -78,6 +84,7 @@ export function getCategoryAttributes(name: Category["name"]): {
           text: "text-rose-400",
           background: "bg-rose-400",
           border: "border-rose-400",
+          fill: "fill-rose-400",
         },
       };
     case "Plumbing Materials":
@@ -87,6 +94,27 @@ export function getCategoryAttributes(name: Category["name"]): {
           text: "text-sky-400",
           background: "bg-sky-400",
           border: "border-sky-400",
+          fill: "fill-sky-400",
+        },
+      };
+    case "Construction Tools":
+      return {
+        icon: Axe,
+        color: {
+          text: "text-fuchsia-400",
+          background: "bg-fuchsia-400",
+          border: "border-fuchsia-400",
+          fill: "fill-fuchsia-400",
+        },
+      };
+    case "Adhesives":
+      return {
+        icon: Blend,
+        color: {
+          text: "text-indigo-400",
+          background: "bg-indigo-400",
+          border: "border-indigo-400",
+          fill: "fill-indigo-400",
         },
       };
   }

@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-import { Cart, Product } from "@/lib/types";
+import { Cart, CartItem, Product } from "@/lib/types";
 import { nanoid } from "@/lib/utils";
 
 type CartState = {
@@ -13,6 +13,10 @@ type CartActions = {
     toggleItem: (product: Product) => void;
     increaseItemQuantity: (id: Product["id"]) => void;
     decreaseItemQuantity: (id: Product["id"]) => void;
+    changeItemQuantity: (
+      id: Product["id"],
+      quantity: CartItem["quantity"],
+    ) => void;
     deleteItem: (id: Product["id"]) => void;
     reset: () => void;
   };
@@ -50,7 +54,7 @@ const cartStore = create<CartState & CartActions>()(
               cart: nextCart,
             };
           }),
-        increaseItemQuantity: (id: Product["id"]) =>
+        increaseItemQuantity: (id) =>
           set((state) => ({
             cart: state.cart.map((item) => {
               return item.product.id === id
@@ -58,12 +62,18 @@ const cartStore = create<CartState & CartActions>()(
                 : item;
             }),
           })),
-        decreaseItemQuantity: (id: Product["id"]) =>
+        decreaseItemQuantity: (id) =>
           set((state) => ({
             cart: state.cart.map((item) => {
               return item.product.id === id && item.quantity > 1
                 ? { ...item, quantity: item.quantity - 1 }
                 : item;
+            }),
+          })),
+        changeItemQuantity: (id, quantity) =>
+          set((state) => ({
+            cart: state.cart.map((item) => {
+              return item.product.id === id ? { ...item, quantity } : item;
             }),
           })),
         deleteItem: (id) =>

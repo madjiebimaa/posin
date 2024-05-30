@@ -1,12 +1,9 @@
 "use client";
 
-import { Minus, Plus, Trash } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
+import ItemQuantityInput from "@/components/cart/item-quantity-input";
 
 import { CartItem } from "@/lib/types";
 import { cn, rupiah } from "@/lib/utils";
-import { useCartActions } from "@/store/cart";
 
 interface CartItemCardProps extends React.ComponentPropsWithoutRef<"div"> {
   item: CartItem;
@@ -17,12 +14,10 @@ export default function CartItemCard({
   className,
   ...props
 }: CartItemCardProps) {
-  const cartActions = useCartActions();
-
   return (
     <div
       className={cn(
-        "flex h-24 flex-col justify-between rounded-xl bg-slate-100 p-4 sm:h-20",
+        "flex flex-col gap-2 rounded-xl bg-slate-100 p-4",
         className,
       )}
       {...props}
@@ -30,37 +25,7 @@ export default function CartItemCard({
       <p className="text-pretty text-sm">{item.product.name}</p>
       <div className="flex items-center justify-between">
         <p className="text-sm font-bold">{rupiah(item.product.price)}</p>
-        <div className="flex items-center gap-4">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="size-6 shrink-0 text-slate-500"
-            onClick={() => cartActions.deleteItem(item.product.id)}
-          >
-            <Trash className="size-4 shrink-0" />
-          </Button>
-          <div className="flex items-center rounded-md border">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="size-6 shrink-0 rounded-r-none text-slate-500"
-              onClick={() => cartActions.decreaseItemQuantity(item.product.id)}
-            >
-              <Minus className="size-4 shrink-0" />
-            </Button>
-            <span className="flex h-6 w-12 shrink-0 items-center justify-center border-x">
-              {item.quantity}
-            </span>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="size-6 shrink-0 rounded-l-none text-slate-500"
-              onClick={() => cartActions.increaseItemQuantity(item.product.id)}
-            >
-              <Plus className="size-4 shrink-0" />
-            </Button>
-          </div>
-        </div>
+        <ItemQuantityInput item={item} />
       </div>
     </div>
   );

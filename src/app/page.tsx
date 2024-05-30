@@ -11,8 +11,8 @@ import { Separator } from "@/components/ui/separator";
 
 export default function Home() {
   return (
-    <main className="mx-auto flex h-dvh max-w-xl flex-col">
-      <section className="flex items-center justify-between gap-2 p-4">
+    <main className="bg- mx-auto flex h-dvh max-w-xl flex-col">
+      <section className="bg- flex items-center justify-between gap-2 p-4">
         <Suspense fallback={<ProductSearchSkeleton />}>
           <ProductSearch />
         </Suspense>
@@ -25,7 +25,7 @@ export default function Home() {
         <Separator />
       </div>
       <Suspense fallback={<ProductCardListSkeleton />}>
-        <ProductCardList className="mt-6 px-4" />
+        <ProductCardList className="mt-6 px-4 pb-4" />
       </Suspense>
     </main>
   );
